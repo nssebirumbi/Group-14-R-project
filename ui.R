@@ -59,7 +59,6 @@ shinyUI(
                                                Tab = "\t"),
                                    selected = ","),
                       
-                      # Input: Select quotes ----
                       radioButtons("quote", "Quote",
                                    choices = c(None = "",
                                                "Double Quote" = '"',
