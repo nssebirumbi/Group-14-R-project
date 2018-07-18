@@ -22,8 +22,18 @@ shinyUI(
     ),  
     dashboardBody(
       tabItems(
-        tabItem(tabName = "home"
+        tabItem(tabName = "home",
+                h2("Description"),
+                p("The Mobile App Statistics is a data system that analyzes app details from the App Store and generates insights which are intended to help developers get more people to download their applications and optimistically increase the user ratings of their apps. "),br(), 
                 
+                h2("System functionality"),
+                em(p("Users of this system can use it to collect analysis on;")),
+                p("1.  How price of an app affect the user rating and which app groups are most bought which will help app developers while pricing their apps."),
+                p("2.   How new versions have improved the app ratings."),
+                p("3.   Which app group has the best, average, and least user ratings which will give app developers a field to focus on most."),
+                p("4.   How the size of an app affect its user rating."),
+                p("5.   how app screen shots shown when users are downloading apps affect user rating."),
+                p("6.   How languages supported by the App affect user ratings.")
         ),
         
         tabItem(tabName = "dataset"
