@@ -5,17 +5,7 @@ library(ggplot2)
 #line below increases the size of the file to be uploaded from the defalt 5MBS to 15MBS.
 options(shiny.maxRequestSize=15*1024^2)
 shinyServer(function(input,output){
-  output$hist<-renderPlot({
-    #hist(data1$user_rating,breaks = input$bins)
-    ggplot(data = input$files,aes(x=user_rating))+geom_histogram(bins = input$bins)+
-      
-      labs(title="Histogram",
-            subtitle="A Histogram showing the distribution of useratings",
-           x="User rating",
-           y="Number of apps")
-  }
-  
-  )
+ 
   #code to diisplay the select option for the loaded files.
   output$selectfile<-renderUI({
     if(is.null(input$file1)){return()}
