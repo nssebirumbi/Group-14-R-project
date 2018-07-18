@@ -42,3 +42,69 @@ shinyServer(function(input,output){
   
 })
 
+output$hist<-renderPlot({
+    
+    if(input$appDetails== "user_rating"){
+      #plot a bar graph showing the distribution of user ratings
+      return(ggplot(data = data1,aes(x=user_rating))+geom_histogram(bins = input$bins)+
+               
+               labs(title="A Histogram showing the distribution of user ratings",
+                    x="User Ratings",
+                    y="Number of apps"))
+    }
+    if(input$appDetails== "prime_genre"){
+      #plot a bar graph to show the distribution of app groups
+      return( ggplot(data=data1,aes(x=prime_genre))+
+                geom_bar()+
+                labs(title="A bar plot showing the distribution of app groups",
+                     x="App Group",
+                     y="Number of apps"
+                  
+                ))
+    }
+    if(input$appDetails=="size_bytes"){
+      return(
+        ggplot(data=data1,aes(x=size_bytes))+
+          geom_histogram(bins = input$bins)+
+          labs(title="A bar plot showing the distribution of app sizes",
+               x="size of apps in bytes",
+               y="Number of apps"
+               
+          )
+      )
+    }
+    if(input$appDetails=="price"){
+      return(
+        ggplot(data=data1,aes(x=as.factor(price)))+
+          geom_bar()+
+          labs(title="A bar plot showing the distribution of price",
+               x="Price",
+               y="Number of apps"
+            
+          )
+      )
+    }
+    if(input$appDetails=="lang.num"){
+      return(
+        ggplot(data=data1,aes(x=lang.num))+
+          geom_histogram(bins = input$bins)+
+          labs(title="A Histogram showing the distribution of Languages supported by each app",
+               x="Number of Languages supported",
+               y="Number of apps")
+      )
+    }
+    if(input$appDetails=="sup_devices.num"){
+      return(
+        ggplot(data = data1,aes(x=sup_devices.num))+
+          geom_histogram(bins=30)+
+          labs(title="Distribution of Number of devices supported",
+               x="Number of devices supported",
+               y="Number of apps")
+      )
+    }
+    else{
+      return(NULL)
+    }
+    
+  })
+}

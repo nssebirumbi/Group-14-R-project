@@ -25,7 +25,8 @@ shinyUI(
         tabItem(tabName = "home"
                 
         ),
-        tabItem(tabName = "dataset",
+        
+        tabItem(tabName = "dataset"
                 # Define UI for data upload app ----
                 ui <- fluidPage(
                   
@@ -86,12 +87,46 @@ shinyUI(
                     
                   )
                 )
-                
         ),
         
-        tabItem(tabName = "visualization"
+        tabItem(tabName = "visualization",
                 
-        ),
+                fluidRow(
+                  
+                  tabsetPanel(type="tab",
+                              tabPanel("Distributions",
+                                       fluidRow(
+                                         plotOutput("hist")
+                                         
+                                         
+                                       ),
+                                       fluidRow(
+                                         
+                                         box(title = "controls for the Graph",status = "primary",solidHeader = T,
+                                             sliderInput("bins","Number of Breaks",1,100,50)
+                                         ),
+                                         box(title = "App Details to show their distributions",status = "primary",solidHeader = T,
+                                             "These app deatails were named according to column names in the CSV fie",
+                                             selectInput("appDetails","select app property",c("user_rating","size_bytes","prime_genre","price","sup_devices.num","lang.num"),selected = "user_rating")
+                                         )
+                                         
+                                         
+                                         
+                                         
+                                       )
+                                       
+                                       
+                                       
+                                       
+                              ),
+                              tabPanel("Price vs user ratings"),
+                              tabPanel("Size vs user ratings"),
+                              tabPanel("No of languages Vs useratings")
+                              
+                  )
+                  
+                  
+                ),
         tabItem(tabName = "summary"
                 
         ),
