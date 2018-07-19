@@ -36,7 +36,7 @@ shinyUI(
                 p("6.   How languages supported by the App affect user ratings.")
         ),
         
-        tabItem(tabName = "dataset"
+        tabItem(tabName = "dataset",
                 # Define UI for data upload app ----
                 ui <- fluidPage(
                   
@@ -133,8 +133,8 @@ shinyUI(
                               tabPanel("Size vs user ratings"),
                               tabPanel("No of languages Vs useratings")
                               
+                  		)
                   )
-                  
                   
                 ),
         tabItem(tabName = "summary"
@@ -169,14 +169,15 @@ shinyUI(
                                       p("13.	\"sup_devices.num\": Number of supporting devices "),
                                       p("14.	\"ipadSc_urls.num\": Number of screenshots showed for display"), 
                                       p("15.	\"lang.num\": Number of supported languages") ,
-                                      p("16.	\"vpp_lic\": Vpp Device Based Licensing Enabled 
-                           ")))
+                                      p("16.	\"vpp_lic\": Vpp Device Based Licensing Enabled ")
+																		)
+													)
                
-        )
-      )
+        					)
+      			)
       
       
-    )
-  )
+    		)
+  	)
   
 )
