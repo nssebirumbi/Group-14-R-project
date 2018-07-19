@@ -107,4 +107,3 @@ output$hist<-renderPlot({
     }
     
   })
-}
