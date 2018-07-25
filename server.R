@@ -105,5 +105,54 @@ output$hist<-renderPlot({
     else{
       return(NULL)
     }
-    
+     output$price<-renderPlot({
+    if(input$price=="boxplot"){
+      return(
+        ggplot(data=data(),aes(x=as.factor(user_rating),y=price,fill=as.factor(user_rating)))+
+          theme_bw()+
+          geom_boxplot()+
+          labs(title="A box plot showing the how price affects user ratings",
+               x="user rating",
+               y="price")
+      )
+    }
+    if(input$price=="Regression"){
+      return(
+        ggplot(data=data(),aes(x=user_rating,y=price))+
+          geom_point()+
+          geom_smooth(method = lm, se=FALSE)+
+          labs(title="A scatter plot shhowing the correlation between price and user rating",
+               x="User rating",
+               y="Price of Apps"
+            
+          )
+        
+      )
+    }
+  })
+  output$size<-renderPlot({
+    if(input$size=="boxplot"){
+      return(
+        ggplot(data=data(),aes(x=as.factor(user_rating),y=size_bytes,fill=as.factor(user_rating)))+
+          theme_bw()+
+          geom_boxplot()+
+          labs(title="A box plot showing the how size of apps affects user ratings",
+               x="User rating",
+               y="size of app")
+      )
+    }
+    if(input$size=="Regression"){
+      return(
+        ggplot(data=data(),aes(x=user_rating,y=size_bytes))+
+          geom_point()+
+          geom_smooth(method = lm, se=FALSE)+
+          labs(title="A scatter plot shhowing the correlation between size and user rating",
+               x="User rating",
+               y="Size of an App"
+               
+          )
+        
+      )
+    }
+  })
   })
