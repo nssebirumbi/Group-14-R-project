@@ -361,4 +361,91 @@ output$hist<-renderPlot({
     }
     
   })
+ 
+ output$sum_ary<-renderTable({
+  if(input$columns=="user_rating"){
+    return(
+      as.array(summary(data()$user_rating))
+    )
+  }
+  if(input$columns=="size_bytes"){
+    return(
+      as.array(summary(data()$size_bytes))
+    )
+  }
+  if(input$columns=="cont_rating"){
+    return(
+      as.array(summary(data()$cont_rating))
+    )
+  }
+  if(input$columns=="lang.num"){
+    return(
+      as.array(summary(data()$lang.num))
+    )
+  }
+  if(input$columns=="sup_devices.num"){
+    return(
+      as.array(summary(data()$sup_devices.num))
+    )
+  }
+  if(input$columns=="price"){
+    return(
+      as.array(summary(data()$price))
+    )
+  }
+  if(input$columns=="ipadSc_urls.num"){
+    return(
+      as.array(summary(data()$ipadSc_urls.num))
+    )
+  }
+  
+  
+  
+})
+ 
+ output$table<-renderTable({
+  if(input$table=="user_rating"){
+    return(
+      as.array(table(data()$user_rating))
+    )
+  }
+  if(input$table=="size_bytes"){
+    return(
+      as.array(table(data()$size_bytes))
+    )
+  }
+  if(input$table=="cont_rating"){
+    return(
+      as.array(table(data()$cont_rating))
+    )
+  }
+  if(input$table=="lang.num"){
+    return(
+      as.array(table(data()$lang.num))
+    )
+  }
+  if(input$table=="sup_devices.num"){
+    return(
+      as.array(table(data()$sup_devices.num))
+    )
+  }
+  if(input$table=="price"){
+    return(
+      as.array(table(data()$price))
+    )
+  }
+  if(input$table=="prime_genre"){
+    return(
+      as.array(table(data()$prime_genre))
+    )
+  }
+  if(input$table=="ipadSc_urls.num"){
+    return(
+      as.array(table(data()$ipadSc_urls.num))
+    )
+  }
+  
+  
+  
+})
   })
