@@ -129,8 +129,33 @@ shinyUI(
                                        
                                        
                               ),
-                              tabPanel("Price vs user ratings"),
-                              tabPanel("Size vs user ratings"),
+                              tabPanel("Price",
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             plotOutput("price")
+                                           ),
+                                           fluidRow(
+                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
+                                                 selectInput("price","select category",c("boxplot","Regression"),selected = "boxplot_variation")
+                                             )
+                                             
+                                           )
+                                         )
+                                         ),
+                               tabPanel("Size",
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             plotOutput("size")
+                                           ),
+                                           fluidRow(
+                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
+                                                 selectInput("size","select category",c("boxplot","Regression"),selected = "boxplot_variation")
+                                             )
+                                             
+                                           )
+                                         )
+                                         
+                                         ),
                               tabPanel("No of languages Vs useratings")
                               
                   		)
