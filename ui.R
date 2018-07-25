@@ -98,7 +98,33 @@ shinyUI(
                   )
                 )
         ),
-        
+        tabItem(tabName = "summary",
+                ui<-fluidPage(
+                  fluidRow(
+                    box(title = "Dataset columns",status = "primary",solidHeader = T,
+                        "These app deatails were named according to column names in the CSV fie",
+                        selectInput("columns","select columns to view summary",c("user_rating","ipadSc_urls.num","size_bytes","price","sup_devices.num","lang.num"),selected = "user_rating")
+                    ),
+                    
+                    box(title = "Summary for selected column",status = "primary",solidHeader = T,
+                       tableOutput("sum_ary")
+                    )
+                    
+                  ),
+                  fluidRow(
+                    box(title = "Dataset columns",status = "primary",solidHeader = T,
+                        "These app deatails were named according to column names in the CSV fie",
+                        selectInput("table","select columns to view details",c("user_rating","prime_genre","ipadSc_urls.num","size_bytes","price","sup_devices.num","lang.num"),selected = "user_rating")
+                    ),
+                    
+                    box(title = "Detailed conclusions for each column",status = "primary",solidHeader = T,
+                        tableOutput("table")
+                    )
+                    
+                  )
+                )
+                
+        ),
         tabItem(tabName = "visualization",
                 
                 fluidRow(
@@ -207,10 +233,7 @@ shinyUI(
                   )
                   
                 ),
-        tabItem(tabName = "summary"
-                
-        ),
-	          tabItem(tabName = "sentimental",
+	tabItem(tabName = "sentimental",
                  ui<-fluidPage(
                    fluidRow(
                      tabsetPanel(type="tab",
