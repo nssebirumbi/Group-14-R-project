@@ -14,3 +14,5 @@ NICHOLAS HENRY SSEBIRUMBI
 				ASSIGNMENTS
 1.	Models and attributes in R 
 2.	Search engine
+WordPress Blog
+http://mobileappstatistics.ga
