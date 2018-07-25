@@ -210,6 +210,19 @@ shinyUI(
         tabItem(tabName = "summary"
                 
         ),
+	          tabItem(tabName = "sentimental",
+                 ui<-fluidPage(
+                   fluidRow(
+                     tabsetPanel(type="tab",
+                                 tabPanel("Sentiment",plotOutput("sentiment")),
+                                 tabPanel("Polarity",plotOutput("polarity"))
+                                 
+                     )
+                   )
+                     
+                   )
+                   
+                 ),
         tabItem(tabName = "help" ,
                 tabsetPanel(tabPanel("Data",tableOutput("data"),
                                       h3("How to import datasets"),
