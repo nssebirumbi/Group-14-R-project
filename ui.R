@@ -157,7 +157,7 @@ shinyUI(
                                          
                                          ),
                               tabPanel("No of languages Vs useratings"),
-			                                      tabPanel("Comparison in Groups",
+			              tabPanel("Comparison in Groups",
                                          ui<-fluidPage(
                                            fluidRow(
                                              box(title = "App Detail to Get Group comparison",status = "primary",solidHeader = T,
@@ -166,10 +166,40 @@ shinyUI(
                                              )
                                             
                                            ),
+				
                                            fluidRow(
                                              plotOutput("groups")
                                          )
+                                         ),
+				                                tabPanel("Content rating",
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             plotOutput("content")
+                                             
+                                           ),
+                                           fluidRow(
+                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
+                                                 selectInput("content","select category",c("boxplot","histogram"),selected = "boxplot")
+                                             )
+                                           )
                                          )
+                                  
+                                ),
+                                tabPanel("Screenshots",
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             plotOutput("screenshots")
+                                           ),
+                                           fluidRow(
+                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
+                                                 selectInput("screenshots","select category",c("boxplot","Regression"),selected = "boxplot")
+                                             
+                                           )
+                                         )
+                                         )
+                                ),
+
+					       
                     )
 
                               
@@ -180,6 +210,19 @@ shinyUI(
         tabItem(tabName = "summary"
                 
         ),
+	          tabItem(tabName = "sentimental",
+                 ui<-fluidPage(
+                   fluidRow(
+                     tabsetPanel(type="tab",
+                                 tabPanel("Sentiment",plotOutput("sentiment")),
+                                 tabPanel("Polarity",plotOutput("polarity"))
+                                 
+                     )
+                   )
+                     
+                   )
+                   
+                 ),
         tabItem(tabName = "help" ,
                 tabsetPanel(tabPanel("Data",tableOutput("data"),
                                       h3("How to import datasets"),

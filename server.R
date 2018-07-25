@@ -310,4 +310,55 @@ output$hist<-renderPlot({
   }
   
 })
+ 
+ output$screenshots<-renderPlot({
+  if(input$screenshots=="boxplot"){
+    return(
+      ggplot(data=data(),aes(x=as.factor(user_rating),y=ipadSc_urls.num,fill=as.factor(user_rating)))+
+        theme_bw()+
+        geom_boxplot()+
+        labs(title="A box plot showing the how Number of Screenshots affects user ratings",
+             x="user rating",
+             y="Number of Screenshots")
+    )
+  }
+  if(input$screenshots=="Regression"){
+    return(
+      ggplot(data=data(),aes(x=user_rating,y=ipadSc_urls.num))+
+        geom_point()+
+        geom_smooth(method = lm, se=FALSE)+
+        labs(title="A scatter plot shhowing the correlation between the Number of Screenshots and user rating",
+             x="User rating",
+             y="Number of Screen Shots"
+             
+        )
+      
+    )
+  }
+})
+  output$content<-renderPlot({
+    if(input$content=="boxplot"){
+      return(
+        ggplot(data=data(),aes(x=cont_rating,y=user_rating,fill=cont_rating))+
+          theme_bw()+
+          geom_boxplot()+
+          labs(title="A box plot showing the how size of apps affects user ratings",
+               x="User rating",
+               y="cont_rating")
+      )
+    }
+    if(input$content=="histogram"){
+      return(
+        ggplot(data=data(),aes(x=user_rating,fill=cont_rating))+
+          geom_histogram()+
+          labs(title="A Histogram shhowing the correlation between content Rating and user rating",
+               x="User rating",
+               y="content rating"
+               
+          )
+        
+      )
+    }
+    
+  })
   })
