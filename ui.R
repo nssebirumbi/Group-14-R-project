@@ -105,26 +105,26 @@ shinyUI(
                   
                   tabsetPanel(type="tab",
                               tabPanel("Distributions",
-                                       fluidRow(
-                                         plotOutput("hist")
-                                         
-                                         
-                                       ),
-                                       fluidRow(
-                                         
-                                         box(title = "controls for the Graph",status = "primary",solidHeader = T,
-                                             sliderInput("bins","Number of Breaks",1,100,50)
+                                        fluidRow(
+                                           
+                                           box(title = "controls for the Graph",status = "primary",solidHeader = T,
+                                               sliderInput("bins","Number of Breaks",1,100,50)
+                                           ),
+                                           box(title = "App Details to show their distributions",status = "primary",solidHeader = T,
+                                               "These app deatails were named according to column names in the CSV fie",
+                                               selectInput("appDetails","select app property",c("user_rating","size_bytes","cont_rating","prime_genre","price","sup_devices.num","lang.num"),selected = "user_rating")
+                                           )
+                                           
+                                           
+                                           
                                          ),
-                                         box(title = "App Details to show their distributions",status = "primary",solidHeader = T,
-                                             "These app deatails were named according to column names in the CSV fie",
-                                             selectInput("appDetails","select app property",c("user_rating","size_bytes","prime_genre","price","sup_devices.num","lang.num"),selected = "user_rating")
+                                         fluidRow(
+                                           
+                                           
+                                           plotOutput("hist")
+                                           
+                                           
                                          )
-                                         
-                                         
-                                         
-                                         
-                                       )
-                                       
                                        
                                        
                                        
@@ -156,7 +156,22 @@ shinyUI(
                                          )
                                          
                                          ),
-                              tabPanel("No of languages Vs useratings")
+                              tabPanel("No of languages Vs useratings"),
+			                                      tabPanel("Comparison in Groups",
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             box(title = "App Detail to Get Group comparison",status = "primary",solidHeader = T,
+                                                 "These app deatails were named according to column names in the CSV fie",
+                                                 selectInput("groups","select app property",c("user_rating","cont_rating","size_bytes","price","sup_devices.num","ipadSc_urls.num","lang.num"),selected = "user_rating")
+                                             )
+                                            
+                                           ),
+                                           fluidRow(
+                                             plotOutput("groups")
+                                         )
+                                         )
+                    )
+
                               
                   		)
                   )

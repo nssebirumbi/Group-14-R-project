@@ -130,6 +130,81 @@ output$hist<-renderPlot({
       )
     }
   })
+ 
+  output$hist<-renderPlot({
+   # if(input$select=="AppleStore"){}
+    
+    if(input$appDetails== "user_rating"){
+      #plot a bar graph showing the distribution of user ratings
+      return(ggplot(data = data(),aes(x=user_rating))+geom_histogram(bins = input$bins)+
+               
+               labs(title="A Histogram showing the distribution of user ratings",
+                    x="User Ratings",
+                    y="Number of apps"))
+    }
+    if(input$appDetails== "prime_genre"){
+      #plot a bar graph to show the distribution of app groups
+      return( ggplot(data=data(),aes(x=prime_genre))+
+                geom_bar()+
+                labs(title="A bar plot showing the distribution of app groups",
+                     x="App Group",
+                     y="Number of apps"
+                     
+                ))
+    }
+    if(input$appDetails=="cont_rating"){
+      return(
+        ggplot(data = data(),aes(x=cont_rating,fill= cont_rating))+geom_bar()+
+          labs(title="Distribution of Content Rating",
+               x="Content rating",
+               y="Number of apps")
+      )
+    }
+    if(input$appDetails=="size_bytes"){
+      return(
+        ggplot(data=data(),aes(x=size_bytes))+
+          geom_histogram(bins = input$bins)+
+          labs(title="A bar plot showing the distribution of app sizes",
+               x="size of apps in bytes",
+               y="Number of apps"
+               
+          )
+      )
+    }
+    if(input$appDetails=="price"){
+      return(
+        ggplot(data=data(),aes(x=as.factor(price)))+
+          geom_bar()+
+          labs(title="A bar plot showing the distribution of price",
+               x="Price",
+               y="Number of apps"
+               
+          )
+      )
+    }
+    if(input$appDetails=="lang.num"){
+      return(
+        ggplot(data=data(),aes(x=lang.num))+
+          geom_histogram(bins = input$bins)+
+          labs(title="A Histogram showing the distribution of Languages supported by each app",
+               x="Number of Languages supported",
+               y="Number of apps")
+      )
+    }
+    if(input$appDetails=="sup_devices.num"){
+      return(
+        ggplot(data = data(),aes(x=sup_devices.num))+
+          geom_histogram(bins=30)+
+          labs(title="Distribution of Number of devices supported",
+               x="Number of devices supported",
+               y="Number of apps")
+      )
+    }
+    else{
+      return(NULL)
+    }
+    
+  })
   output$size<-renderPlot({
     if(input$size=="boxplot"){
       return(
@@ -155,4 +230,84 @@ output$hist<-renderPlot({
       )
     }
   })
+ output$groups<-renderPlot({
+  
+  if(input$groups=="user_rating"){
+    return(
+      ggplot(data=data(),aes(x=prime_genre,y=user_rating))+
+        theme_bw()+
+        geom_boxplot()+
+        labs(title="Comparison of app groups basing on user rating",
+             x="App Group",
+             y="user rating")
+    )
+    
+  }
+  if(input$groups=="size_bytes"){
+    return(
+      ggplot(data=data(),aes(x=prime_genre,y=size_bytes))+
+        theme_bw()+
+        geom_boxplot()+
+        labs(title="Comparison of app Groups basing on size",
+             x="App Group",
+             y="Size ofApps in bytes")
+    )
+    
+  }
+  if(input$groups=="size_bytes"){
+    return(
+      ggplot(data=data(),aes(x=prime_genre,y=size_bytes))+
+        theme_bw()+
+        geom_boxplot()+
+        labs(title="Comparison of app Groups basing on size",
+             x="App Group",
+             y="Size ofApps in bytes")
+    )
+    
+  }
+  if(input$groups=="cont_rating"){
+    return(
+      ggplot(data=data(),aes(x=prime_genre,fill=cont_rating))+
+        theme_bw()+
+        geom_bar()+
+        labs(title="Comparison of app Groups basing on price",
+             x="App Group",
+             y="price")
+    )
+    
+  }
+  if(input$groups=="ipadSc_urls.num"){
+    return(
+      ggplot(data=data(),aes(x=prime_genre,y=ipadSc_urls.num))+
+        theme_bw()+
+        geom_boxplot()+
+        labs(title="Comparison of app Groups basing on Number of Screenshots",
+             x="App Group",
+             y="Number of Screenshots")
+    )
+  }
+  if(input$groups=="sup_devices.num"){
+    return(
+      ggplot(data=data(),aes(x=prime_genre,y=sup_devices.num))+
+        theme_bw()+
+        geom_boxplot()+
+        labs(title="Comparison of app Groups basing on Number of devices suppported",
+             x="App Group",
+             y="Number of devices supported")
+    )
+    
+  }
+  if(input$groups=="lang.num"){
+    return(
+      ggplot(data=data(),aes(x=prime_genre,y=lang.num))+
+        theme_bw()+
+        geom_boxplot()+
+        labs(title="Comparison of app Groups basing on Number of languages it supports",
+             x="App Group",
+             y="Number of languages supported")
+    )
+    
+  }
+  
+})
   })
