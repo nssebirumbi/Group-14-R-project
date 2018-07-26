@@ -230,6 +230,21 @@ output$hist<-renderPlot({
       )
     }
   })
+ output$sentiment<-renderPlot({
+  myCopy <- data()$app_desc
+  #carryout sentiment mining using the get_nrc_sentiment()function #log the findings under a variable result
+  result_copy<- get_nrc_sentiment(as.character(myCopy))
+  #change result from a list to a data frame and transpose it 
+  result4<-data.frame(t(result_copy))
+  #rowSums computes column sums across rows for each level of a #grouping variable.
+  new_result1 <- data.frame(rowSums(result4))
+  #name rows and columns of the dataframe
+  names(new_result1)[1] <- "count"
+  new_result1 <- cbind("sentiment" = rownames(new_result1), new_result1)
+  rownames(new_result1) <- NULL
+  #plot the first 8 rows,the distinct emotions
+  qplot(sentiment, data=new_result1[1:8,], weight=count, geom="bar",fill=sentiment)+ggtitle("App description Sentiments")
+})
  output$groups<-renderPlot({
   
   if(input$groups=="user_rating"){
