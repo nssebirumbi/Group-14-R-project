@@ -14,6 +14,7 @@ shinyUI(
         ),
         menuItem("Summary",tabName = "summary",icon = icon("list-alt")),
         menuItem("Visualization",tabName = "visualization",icon=icon("bar-chart-o")),
+        menuItem("Sentimental Analysis",tabName = "sentimental",icon = icon("refresh")),
         menuItem("Help",tabName = "help",icon = icon("cog", lib = "glyphicon"))
       )
       
@@ -34,6 +35,7 @@ shinyUI(
                 p("4.   How the size of an app affect its user rating."),
                 p("5.   how app screen shots shown when users are downloading apps affect user rating."),
                 p("6.   How languages supported by the App affect user ratings.")
+                
         ),
         
         tabItem(tabName = "dataset",
@@ -98,7 +100,183 @@ shinyUI(
                   )
                 )
         ),
+        
+        tabItem(tabName = "visualization",
+                ui<-fluidPage(
+                  
+                  fluidRow(
+                    
+                    tabsetPanel(type="tab",
+                                tabPanel("Distributions",
+                                         h3("Description"),
+                                         p("The graphs below show the distribution of different variables (column names) 
+                                           with the number of apps in the dataset. The graphs change according to what the user chooses from
+                                           the dropdown option."),
+                                         fluidRow(
+                                           
+                                           box(title = "controls for the Graph",status = "primary",solidHeader = T,
+                                               sliderInput("bins","Number of Breaks",1,100,50)
+                                           ),
+                                           box(title = "App Details to show their distributions",status = "primary",solidHeader = T,
+                                               "These app deatails were named according to column names in the CSV fie",
+                                               selectInput("appDetails","select app property",c("user_rating","size_bytes","cont_rating","prime_genre","price","sup_devices.num","lang.num"),selected = "user_rating")
+                                           )
+                                           
+                                           
+                                           
+                                         ),
+                                         fluidRow(
+                                           
+                                           
+                                           plotOutput("hist")
+                                           
+                                           
+                                         )
+                                         
+                                         
+                                         
+                                         
+                                ),
+                                tabPanel("Price",
+                                         h3("Description"),
+                                         p("The boxplot below shows the variation of price of apps with the user ratings. The user has an option of changing 
+                                           the graph to show the regressing line."),
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             plotOutput("price")
+                                           ),
+                                           fluidRow(
+                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
+                                                 selectInput("price","select category",c("boxplot","Regression"),selected = "boxplot_variation")
+                                             )
+                                             
+                                           )
+                                         )
+                                         ),
+                                tabPanel("Size",
+                                         h3("Description"),
+                                         p("The boxplot below shows the variation of size of  apps with the user ratings. The user has an option of changing 
+                                           the graph to show the regressing line."),
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             plotOutput("size")
+                                           ),
+                                           fluidRow(
+                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
+                                                 selectInput("size","select category",c("boxplot","Regression"),selected = "boxplot_variation")
+                                             )
+                                             
+                                           )
+                                         )
+                                         
+                                         ),
+                                tabPanel("No of languages",
+                                         h3("Description"),
+                                         p("The boxplot below shows the variation of lunguages supported by  apps with the user ratings. The user has an option of changing 
+                                           the graph to show the regressing line."),
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             plotOutput("languages")
+                                           ),
+                                           fluidRow(
+                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
+                                                 selectInput("languages","select category",c("boxplot","Regression"),selected = "boxplot_variation")
+                                             )
+                                             
+                                           )
+                                         )
+                                         
+                                         ),
+                                tabPanel("Content rating",
+                                         h3("Description"),
+                                         p("The boxplot below shows the variation of content rating of apps with the user ratings. The user has an option of changing 
+                                           the histogram to show number of apps of a certain content rating contained in each user rating "),
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             plotOutput("content")
+                                             
+                                           ),
+                                           fluidRow(
+                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
+                                                 selectInput("content","select category",c("boxplot","histogram"),selected = "boxplot")
+                                             )
+                                           )
+                                         )
+                                  
+                                ),
+                                tabPanel("Screenshots",
+                                         h3("Description"),
+                                         p("The boxplot below shows the variation of the number of screenshots of apps displayed with the user ratings.  The user has an option of changing 
+                                           the graph to show the regressing line."),
+                                         ui<-fluidPage(
+                                           fluidRow(
+                                             plotOutput("screenshots")
+                                           ),
+                                           fluidRow(
+                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
+                                                 selectInput("screenshots","select category",c("boxplot","Regression"),selected = "boxplot")
+                                             
+                                           )
+                                         )
+                                         )
+                                ),
+                                tabPanel("App Versions",
+                                         h3("Description"),
+                                         p("The line graphs below compares the user ratings of the current version of apps 
+                                           with the average user ratings of all the other versions. The graphs specifies the 
+                                           increase or decrease of number of apps rated after a new version"),
+                                         ui<-fluidPage({
+                                           plotOutput("versions")
+                                         })
+                                         
+                                         ),
+                                tabPanel("Comparison in Groups",
+                                         h3("Description"),
+                                         p("The boxplots below show the relationship between the different
+                                           variables(column names) and the app groups"),                                         ui<-fluidPage(
+                                           fluidRow(
+                                             box(title = "App Detail to Get Group comparison",status = "primary",solidHeader = T,
+                                                 "These app deatails were named according to column names in the CSV fie",
+                                                 selectInput("groups","select app property",c("user_rating","size_bytes","price","sup_devices.num","ipadSc_urls.num","lang.num"),selected = "user_rating")
+                                             )
+                                            
+                                           ),
+                                           fluidRow(
+                                             plotOutput("groups")
+                                         )
+                                         )
+                    )
+                    )
+                                
+                    )
+                    
+                    
+                  )
+                ),
+         tabItem(tabName = "sentimental",
+                 ui<-fluidPage(
+                   fluidRow(
+                     tabsetPanel(type="tab",
+                                 tabPanel("Sentiment",
+                                          h3("Description"),
+                                          p("The barplot shows the distribution of sentiment scores of the app description based 
+                                            on emotions"),plotOutput("sentiment")),
+                                 tabPanel("Polarity",
+                                          h3("Description"),
+                                          p("The barplot shows the distribution of sentiment scores of the app description based 
+                                            on polarity"),plotOutput("polarity"))
+                                 
+                     )
+                   )
+                     
+                   )
+                   
+                 ),
+                
         tabItem(tabName = "summary",
+                h3("Summary Description"),
+                p("The summary specifies the mean, min, max,1st quartile and 3rd quartile and frequency
+                  of variables in the dataset"),
                 ui<-fluidPage(
                   fluidRow(
                     box(title = "Dataset columns",status = "primary",solidHeader = T,
@@ -125,129 +303,8 @@ shinyUI(
                 )
                 
         ),
-        tabItem(tabName = "visualization",
-                
-                fluidRow(
-                  
-                  tabsetPanel(type="tab",
-                              tabPanel("Distributions",
-                                        fluidRow(
-                                           
-                                           box(title = "controls for the Graph",status = "primary",solidHeader = T,
-                                               sliderInput("bins","Number of Breaks",1,100,50)
-                                           ),
-                                           box(title = "App Details to show their distributions",status = "primary",solidHeader = T,
-                                               "These app deatails were named according to column names in the CSV fie",
-                                               selectInput("appDetails","select app property",c("user_rating","size_bytes","cont_rating","prime_genre","price","sup_devices.num","lang.num"),selected = "user_rating")
-                                           )
-                                           
-                                           
-                                           
-                                         ),
-                                         fluidRow(
-                                           
-                                           
-                                           plotOutput("hist")
-                                           
-                                           
-                                         )
-                                       
-                                       
-                                       
-                              ),
-                              tabPanel("Price",
-                                         ui<-fluidPage(
-                                           fluidRow(
-                                             plotOutput("price")
-                                           ),
-                                           fluidRow(
-                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
-                                                 selectInput("price","select category",c("boxplot","Regression"),selected = "boxplot_variation")
-                                             )
-                                             
-                                           )
-                                         )
-                                         ),
-                               tabPanel("Size",
-                                         ui<-fluidPage(
-                                           fluidRow(
-                                             plotOutput("size")
-                                           ),
-                                           fluidRow(
-                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
-                                                 selectInput("size","select category",c("boxplot","Regression"),selected = "boxplot_variation")
-                                             )
-                                             
-                                           )
-                                         )
-                                         
-                                         ),
-                              tabPanel("No of languages Vs useratings"),
-			              tabPanel("Comparison in Groups",
-                                         ui<-fluidPage(
-                                           fluidRow(
-                                             box(title = "App Detail to Get Group comparison",status = "primary",solidHeader = T,
-                                                 "These app deatails were named according to column names in the CSV fie",
-                                                 selectInput("groups","select app property",c("user_rating","cont_rating","size_bytes","price","sup_devices.num","ipadSc_urls.num","lang.num"),selected = "user_rating")
-                                             )
-                                            
-                                           ),
-				
-                                           fluidRow(
-                                             plotOutput("groups")
-                                         )
-                                         ),
-				                                tabPanel("Content rating",
-                                         ui<-fluidPage(
-                                           fluidRow(
-                                             plotOutput("content")
-                                             
-                                           ),
-                                           fluidRow(
-                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
-                                                 selectInput("content","select category",c("boxplot","histogram"),selected = "boxplot")
-                                             )
-                                           )
-                                         )
-                                  
-                                ),
-                                tabPanel("Screenshots",
-                                         ui<-fluidPage(
-                                           fluidRow(
-                                             plotOutput("screenshots")
-                                           ),
-                                           fluidRow(
-                                             box(title = "Variation Categories",status = "primary",solidHeader = T,
-                                                 selectInput("screenshots","select category",c("boxplot","Regression"),selected = "boxplot")
-                                             
-                                           )
-                                         )
-                                         )
-                                ),
-
-					       
-                    )
-
-                              
-                  		)
-                  )
-                  
-                ),
-	tabItem(tabName = "sentimental",
-                 ui<-fluidPage(
-                   fluidRow(
-                     tabsetPanel(type="tab",
-                                 tabPanel("Sentiment",plotOutput("sentiment")),
-                                 tabPanel("Polarity",plotOutput("polarity"))
-                                 
-                     )
-                   )
-                     
-                   )
-                   
-                 ),
-        tabItem(tabName = "help" ,
-                tabsetPanel(tabPanel("Data",tableOutput("data"),
+        tabItem(tabName = "help",
+                tabsetPanel( tabPanel("Data",tableOutput("data"),
                                       h3("How to import datasets"),
                                       h4("Steps"),
                                       p("1-Import a dataset with a name Applestore.csv 
@@ -300,12 +357,11 @@ shinyUI(
                                       p("2- Sentiment and polarity navigation tabs are displayed"),
                                       p("3- Click on sentiment to display the sentimental analysis"),
                                       p("4- Click on polarity to display the polarity")))
-               
-        					)
-      			)
+                
+        )
+      )
       
       
-    		)
-  	)
-  
+    )
+  )
 )
